@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>	
+<meta charset = "UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+<style>
+	@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+	@import url('https://fonts.googleapis.com/css?family=Trirong');
+	body {
+	background-image: url("http://static.tumblr.com/u98zfsh/1UUofr7ze/mountain.jpeg");
+	}
+	#header {
+	background-color: rgba(0,0,0,.5);
+	}
+	#header h1 {
+	font-family: 'Amatic SC';
+	color:white;
+	font-size: 6em;
+	}
+	#content {
+	margin: 2em;
+	margin-bottom: 5em;
+	}
+	#quote-box {
+	    background-color: #fff;
+	    margin: 1em auto;
+	    border-radius: 1em;
+	    max-width: 40em;
+	    padding: 0.5em 0;
+	}
+	#quote-box p {
+	    margin: 1em;
+	    font-family: 'Trirong';
+	    font-size: 1.5em;
+	}
+	#quote {
+	    font-weight: bold;
+	}
+	#quote-box #author {
+	    text-align: right;
+	}
+	#btns {
+	margin: 0 auto;
+	}
+	#btns button {
+	    margin: 0 0.5em 0.5em 0;
+	}
+	#footer {
+	color: white;
+	background-color: black;
+	padding: 1em 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+</head>
+<body>
+<script>
+    
+            $(document).ready(function(){
+    //quote button
+    $("#btnquote").on('click', function() {
+        $.getJSON("https://random-quote-generator.herokuapp.com/api/quotes/", function(json) {
+        var html = JSON.stringify(json);
+        html = JSON.parse(html);
+      var x = Math.floor(Math.random() * (html.length++));  
+      $('#text').html('<p id = "quote">"' + html[x].quote + '"</p><p id="author">' + html[x].author + '</p>');
+        })
+    }) 
+  //  twitter button
+   $("#share").on('click', function() {
+        window.open("http://twitter.com/intent/tweet?text=" + $('#quote').text () + " - " + $('#author').text());
+        })
+});
+     
+</script>
+      <div class="container-fluid">
+	<div id="header" class="row">
+		<h1 class="text-center">RANDOM QUOTE MACHINE</h1>
+	</div>
+	<div id="content">
+		<div id="quote-box">
+			<div id="text">
+			<p id="quote">"I love chicken lasagna"</p>
+			<p id="author">- Taís Jaques</p>
+			</div>
+		</div>
+		<div id="btns" class="row">
+      <div id="btns" class="text-center">
+      <button id="btnquote" type="button" class="btn btn-primary btn-lg">Another Quote</button>
+      <button id="share" type="button" class="btn btn-info btn-lg"><i class="fa fa-twitter"></i> Share</button></a></div>
+		</div >
+	</div>
+	<div id="footer" class="row">
+		<p id="by" class="text-center">Code by <a href="/" target = "_blank">Tiago</a ></p>
+	</div>
+	</div>
+	
+</body>
+</html>
